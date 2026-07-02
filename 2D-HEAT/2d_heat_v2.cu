@@ -155,6 +155,8 @@ __global__ void run_sim(float *d_in, float *d_out)
                         else
                             prevx = BOUNDARY_TEMP;
                     }
+                    else
+                        prevx = BOUNDARY_TEMP;
                 }
                 else 
                     prevx = shmem[i*TILESIZE+thy][j*TILESIZE+thx-1]*((int)(prevx_exists)) + BOUNDARY_TEMP*((int)(!prevx_exists));
@@ -167,8 +169,9 @@ __global__ void run_sim(float *d_in, float *d_out)
                             prevy = shby[i-1][j][thx];
                         else
                             prevy = BOUNDARY_TEMP;
-
                     }
+                    else
+                        prevy = BOUNDARY_TEMP;
                 }
                 else
                     prevy = shmem[i*TILESIZE+thy-1][j*TILESIZE+thx]*((int)(prevy_exists)) + BOUNDARY_TEMP*((int)(!prevy_exists));
